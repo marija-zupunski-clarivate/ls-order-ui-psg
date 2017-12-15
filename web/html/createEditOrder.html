@@ -1,0 +1,102 @@
+<html>
+<head>
+<script language='JavaScript' src='../javascripts/d2w.js'></script>
+</head>
+<H2>Customer Information</H2>
+
+<FORM action='/ListSales/servlet/Driver' method=POST name='Data' onsubmit='return validate_byfield()'>
+<CENTER>
+<TABLE>
+
+    <TR><TD>
+      <TH align="left">Order Number:</TH>
+      <TH align="left"><INPUT size="15" type="text" name="orderNm" /></TH>
+    </TD>
+    <TD>
+      <TH align="left">Date:</TH>
+      <TH align="left"><INPUT size="10" type="text" name="date" /></TH>
+    </TD></TR>
+
+  <TR><TD>
+      <TH align="left">List Name:</TH>
+      <TH align="left"><INPUT size="15" type="text" name="listNm" /></TH>
+    </TD>
+    <TD>
+      <TH align="left">Search Id:</TH>
+      <TH align="left"><INPUT size="10" type="text" name="searchId" /></TH>
+    </TD></TR>
+
+  <TR><TD>
+      <TH align="left">Preferences:</TH>
+      <TH align="left"><INPUT size="8" type="text" name="prefnc" /></TH>
+    </TD></TR>
+
+    <TR><TD>
+      <TH align="left">Regions:</TH>
+      <TH align="left"><INPUT size="20" type="text" name="region" /></TH>
+    </TD></TR>
+
+
+  <TR><TD>
+      <TH align="left">Counts:</TH>
+      <TH align="left">Asked:</TH>
+      <TH align="left"><INPUT size="15" type="text" name="askedCt" /></TH>
+    </TD>
+    <TD>
+      <TH align="left">Wanted:</TH>
+      <TH align="left"><INPUT size="10" type="text" name="wantedCt" /></TH>
+  </TD><TD>
+      <TH align="left">Delivered:</TH>
+      <TH align="left"><INPUT size="10" type="text" name="deliveredCt" /></TH>
+    </TD></TR>
+
+  <TR><TD>
+      <TH align="left">Topics:</TH>
+      <TH align="left"><INPUT size="25" type="text" name="topics" /></TH>
+    </TD></TR>
+
+    <TR><TD>
+      <TH align="left">Notes:</TH>
+      <TH align="left"><INPUT size="25" type="text" name="notes" /></TH>
+    </TD></TR>
+
+    <TR><TD>
+      <TH align="left">Delivery Format:</TH>
+      <TH align="left"><INPUT size="25" type="text" name="deliveryFt" /></TH>
+    </TD></TR>
+
+  <TR><TD>
+      <TH align="left">Want USA printed in Domestic Label:</TH>
+      <TH align="left"><INPUT size="15" type="text" name="usaPrinted" /></TH>
+    </TD></TR>
+
+  <TR><TD><br><br> </TD></TR> 
+
+  <TR><TD>
+      <TH> </TH>
+      <TH align="left"><INPUT type="submit" value="Create/Edit Order"></TH>
+      </TD>
+      <TD>
+      <TH> </TH>
+      <TH align="left"><INPUT type="submit" value="View Order"></TH>
+    </TD></TR>
+
+</TABLE>
+
+<BR>
+<INPUT type="hidden" name='Menu' value="Customer Information">
+<INPUT type="hidden" name='Page' value="Cust Info Page">
+</CENTER>
+</FORM>
+</html>
+
+
+
+
+
+
+
+
+
+
+

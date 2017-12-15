@@ -1,0 +1,44 @@
+<HTML>
+<HEAD>
+<link rel="stylesheet" type="text/css" href="../theme/Master.css" />
+<script language='JavaScript' src='../javascripts/d2w.js'></script>
+<TITLE>D2W Login</TITLE>
+</HEAD>
+<BODY>
+<H1>D2W Login Page</H1>
+<center>
+<FORM method="POST" action="/ListSales/servlet/Driver">
+
+<H4>Please Enter Your User ID and Password:</H4>
+<TABLE>
+    <TBODY>
+        <TR>
+            <TD>User ID:</TD>
+            <TD><INPUT size="20" name="userid"></TD>
+        </TR>
+        <TR>
+            <TD>Password</TD>
+            <TD><INPUT size="20" type="password" name="passwd"></TD>
+        </TR>
+    </TBODY>
+</TABLE>
+<BR>
+<H4>Please Select Data Source:</H4>
+<TABLE>
+    <TBODY>
+        <TR>
+            <TD><INPUT type="radio" checked name="DataSrc" value="DB2"></TD>
+            <TD>DB2 Tables</TD>
+        </TR>
+        <TR>
+            <TD><INPUT type="radio" name="DataSrc" value="XML"></TD>
+            <TD>XML Files</TD>
+        </TR>
+    </TBODY>
+</TABLE>
+<BR>
+<INPUT type="reset" value="Reset"><INPUT type="hidden" name='Page' value="Login">
+<INPUT type="submit" value="Log On"></FORM>
+</center>
+</BODY>
+</HTML>

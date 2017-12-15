@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<services>
+  <service
+    name="com.thomson.ts.framework.service.net.EmailHandler"
+    type="com.thomson.ts.framework.service.net.EmailHandler"
+    scope="application"
+    useConfig="yes"
+    configName="com.thomson.ts.framework.service.net.EmailHandler"
+    handler="com.thomson.ts.framework.service.net.EmailHandler">
+    <init-param>
+      <param-name>default_rules_file</param-name>
+         <param-value>main/java/com/thomson/ts/framework/config/digester/rules.xml</param-value>
+       </init-param>
+    <init-param>
+      <param-name>app_data_file</param-name>
+         <param-value>main/java/com/thomson/ts/listsales/service/net/config/email-config.xml</param-value>
+       </init-param>
+   </service>
+</services>

@@ -1,0 +1,13 @@
+This code base is a huge changes from ver 1.0. It addresses the following problems (but not limited to):
+
+1) memory problem due to using HttpSession for caching records which could be hundreds of MB;
+2) accessibility problem (had to be restarted several times a day)
+3) hardcoding problem (not all hardcodings are moved)
+4) browser back button problem;
+5) Order Summaries GUI design and functionality problems;
+6) Stop Addresses problems due to database schema changes;
+7) "Country/Region" update -- since there is no protection, 
+   anyone could accidentally remove countries from a region.
+8) database connection problem due to using non-comprehensive house-grown ConnectionPool
+
+Previous check-ins of Java code include a lot above mentioned changes. More to come under "/web" directory.

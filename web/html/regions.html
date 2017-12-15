@@ -1,0 +1,30 @@
+<html>
+<head>
+<script language='JavaScript' src='../javascripts/d2w.js'></script>
+</head>
+<H2>Regions</H2>
+
+<FORM action='/ListSales/servlet/Driver' method=POST name='Data' onsubmit='return validate_byfield()'>
+<CENTER>
+<TABLE>
+  <TR><TD>
+      <TH>Region :</TH>
+      <TH align="left"><INPUT size="8" type="text" name="regionInfo" /></TH>
+      </TD></TR>
+
+      <TR><TD>
+      <TH>Countries:</TH>
+      <TH align="left"><INPUT size="20" type="text" name="countryInfo" /></TH>
+      </TD></TR>
+      <TR><TD>
+      <TH>Add a Country:</TH>
+      <TH align="left"><INPUT size="20" type="text" name="addCountry" /></TH>
+      </TD></TR>
+</TABLE>
+<BR>
+<INPUT type="reset"> <INPUT type="submit" value="SUBMIT">
+<INPUT type="hidden" name='Menu' value="Regions">
+<INPUT type="hidden" name='Page' >
+</CENTER>
+</FORM>
+</html>

@@ -1,0 +1,98 @@
+<html>
+<head>
+<script language='JavaScript' src='../javascripts/d2w.js'></script>
+</head>
+<H2>Customer Information</H2>
+
+<FORM action='/ListSales/servlet/Driver' method=POST name='custForm' onsubmit='return validate_byfield()'>
+<CENTER>
+<TABLE>
+  <TR><TD>
+      <TH align="left">Customer Id:</TH>
+      <TH align="left"><INPUT size="8" type="text" name="customerId" /></TH>
+    </TD></TR>
+
+    <TR><TD>
+      <TH align="left">Company Name:</TH>
+      <TH align="left"><INPUT size="20" type="text" name="companyName" /></TH>
+    </TD></TR>
+
+  <TR><TD>
+      <TH align="left">Department:</TH>
+      <TH align="left"><INPUT size="25" type="text" name="department" /></TH>
+    </TD></TR>
+
+    <TR><TD>
+      <TH align="left">Billing Address: </TH> 
+    <TH align="left"><input type="checkbox" name="billingInfo" /></TH>
+    </TD></TR>
+
+    <TR><TD>
+      <TH align="left">Street1:</TH>
+      <TH align="left"><INPUT size="25" type="text" name="street1" /></TH>
+    </TD></TR>
+
+    <TR><TD>
+      <TH align="left">Street2:</TH>
+      <TH align="left"><INPUT size="25" type="text" name="street2" /></TH>
+    </TD></TR>
+
+  <TR><TD>
+      <TH align="left">City:</TH>
+      <TH align="left"><INPUT size="15" type="text" name="city" /></TH>
+      </TD>
+  <TD>
+      <TH align="left">Zip:</TH>
+      <TH align="left"><INPUT size="10" type="text" name="zip" /></TH>
+    </TD></TR>
+
+  <TR><TD>
+      <TH align="left">State:</TH>
+      <TH align="left"><INPUT size="15" type="text" name="state" /></TH>
+    </TD>
+    <TD>
+      <TH align="left">Country:</TH>
+      <TH align="left"><INPUT size="10" type="text" name="country" /></TH>
+    </TD></TR>
+
+  <TR><TD> <br> </TD></TR> 
+
+  <TR><TD>
+      <TH> </TH>
+      <TH align="left"><INPUT type="submit" value="SUBMIT"></TH>
+      </TD>
+      <TD>
+      <TH> </TH>
+      <TH align="left"><INPUT type="submit" value="Cancel"></TH>
+    </TD></TR>
+
+  <TR><TD><br><br> </TD></TR> 
+
+  <TR><TD>
+      <TH> </TH>
+      <TH align="left"><INPUT type="submit" onclick="javascript:createOrderButton(document.custForm, 'Create Order')" value="Create/Edit Order"></TH>
+      </TD>
+      <TD>
+      <TH> </TH>
+      <TH align="left"><INPUT type="submit" onclick="javascript:viewOrderButton(document.custForm, 'View Order')" value="View Order"></TH>
+    </TD></TR>
+
+</TABLE>
+
+<BR>
+<INPUT type="hidden" name='Menu' value="Customer Information">
+<INPUT type="hidden" name='Page' value="Cust Info Page">
+</CENTER>
+</FORM>
+</html>
+
+
+
+
+
+
+
+
+
+
+

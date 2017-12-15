@@ -1,0 +1,38 @@
+<html>
+<head>
+<script language='JavaScript' src='../javascripts/d2w.js'></script>
+</head>
+<H2>Query By Field</H2>
+
+<FORM action='/ListSales/servlet/Driver' method=POST name='Data' onsubmit='return validate_byfield()'>
+<CENTER>
+<TABLE>
+        <TR>
+            <TD><INPUT type="radio" checked name="Choice" value="Issueno"></TD>
+            <TH align="right">Issue No: </TH>
+            <TD><INPUT size="20" type="text" name="Issueno" onfocus='setRadio("Issueno")'></TD>
+        </TR>
+        <TR>
+            <TD><INPUT type="radio" name="Choice" value="Accnyr"></TD>
+            <TH align="right">Accession:</TH>
+            <TD><INPUT size="5" type="text" name="Accn" onfocus='setRadio("Accnyr")'></TD>
+            <TH> Pub Year:</TH>
+            <TD><INPUT size="4" type="text" name="Ayear" onfocus='setRadio("Accnyr")'></TD>
+        </TR>
+        <TR>
+            <TD><INPUT type="radio" name="Choice" value="Titleyr"></TD>
+            <TD align="right"><B>Journal Title:</B></TD>
+            <TD><INPUT size="29" type="text" name="Jtitle" onfocus='setRadio("Titleyr")'></TD>
+            <TH> Pub Year: </TH>
+            <TD><INPUT size="4" type="text" name="Jyear" onfocus='setRadio("Titleyr")'></TD>
+        </TR>
+</TABLE>
+<INPUT type="radio" name="DisplayType" value="Issue List" checked>Display Result
+<INPUT type="radio" name="DisplayType" value="Issue Save">Download File<BR>
+<BR>
+<INPUT type="reset"> <INPUT type="submit" value="SUBMIT">
+<INPUT type="hidden" name='Menu' value="Query By Field">
+<INPUT type="hidden" name='Page' >
+</CENTER>
+</FORM>
+</html>

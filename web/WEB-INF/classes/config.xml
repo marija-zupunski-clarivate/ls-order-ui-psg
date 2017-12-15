@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+<D2W>
+  <!-- For DB2 configuration, please refer to META-INF/context.xml -->
+
+  <!-- if Menu is not passed from the request, Independent Page will be called, if Page is not passed neither, the Begin Page will be called -->
+    <Page name="Begin Page" desc="Independent Page">
+      <!-- return page can be a html file or an xsl file (template) -->
+      <!-- if return page is a html file, no work bean will be called, html file will be displayed through jsp page-->
+      <!-- if no template specified, default xsl file will be used, which display records with head and foot, and all data it received -->
+      <ReturnPage>/html/login.html</ReturnPage>
+    </Page>
+  <Page name="Login">
+    <ReturnPage>/html/welcome.html</ReturnPage>
+    <!-- display.jsp page contains menu bar and could display possible retrived records by using template -->
+    <!-- if no jsp page specified, default jsp page will be used, which contains no menu bar, and display retrived record by using template if any -->
+    <JspPage>/jsp/display.jsp</JspPage>
+  </Page>
+  <!-- if Menu is passed, but Page is not, then the Start Page under the menu will be called -->
+  <!-- if both Menu and Page passed, the Page under the Menu will be called -->
+
+    <Menu name="Customer Information" desc="Menu">
+  <Page name="Start Page">
+    <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Customer" Func="getCustIdAndCompanyData"/>
+    <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Customer" Func="getMaxCustomerIdData"/>
+    <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Region" Func="getCountryData"/>
+    <ReturnPage>/templates/Cust_Info/custInfo.xsl</ReturnPage>
+    <JspPage>/jsp/display.jsp</JspPage>
+    <Page name="Cust Info Page">
+        <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Customer" Func="setCustInfo"/>
+        <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Customer" Func="getContactData"/>
+        <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Customer" Func="getCustIdAndCompanyData"/>
+      <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Region" Func="getCountryData"/>
+      <ReturnPage>/templates/Cust_Info/custInfo.xsl</ReturnPage>
+      <JspPage>/jsp/display.jsp</JspPage>
+    </Page>
+    <Page name="Cust Info Page View">
+        <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Customer" Func="getCustIdAndCompanyData"/>
+      <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Region" Func="getCountryData"/>
+      <ReturnPage>/templates/Cust_Info/custInfoView.xsl</ReturnPage>
+      <JspPage>/jsp/display.jsp</JspPage>
+    </Page>
+  </Page>
+    </Menu>
+  <Menu name="Create Order" desc="Menu">
+    <Page name="Start Page">
+    <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Order" Func="getMaxOrderIdData"/>
+  <!-- Req 2  <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Order" Func="getAllOrderIdsData"/> Requirement 2-->
+    <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Customer" Func="getActiveCustIdAndCompanyData"/>
+    <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Customer" Func="getContactData"/>
+        <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Region" Func="getCountryData"/>
+        <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Region" Func="getRegionData"/>
+        <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Region" Func="getStatesData"/>
+        <ReturnPage>/templates/Cust_Info/createOrder.xsl</ReturnPage>
+        <JspPage>/jsp/display.jsp</JspPage>
+    <Page name="Create Page">
+            <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Order" Func="setOrderInfo"/>
+  <!-- req 2    <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Order" Func="getAllOrderIdsData"/>Requirement 2 -->
+        <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Customer" Func="getActiveCustIdAndCompanyData"/>
+      <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Region" Func="getCountryData"/>
+      <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Region" Func="getRegionData"/>
+          <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Region" Func="getStatesData"/>
+            <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Order" Func="getPreferencesData"/>
+            <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Order" Func="getSearchIdData"/>
+            <ReturnPage>/templates/Cust_Info/editOrder.xsl</ReturnPage>
+            <JspPage>/jsp/display.jsp</JspPage>
+        </Page>
+    <Page name="Create Page View">
+            <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Order" Func="setOrderInfo"/>
+       <!-- Req 3     <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Order" Func="getAllOrderIdsData"/> -->
+            <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Customer" Func="getActiveCustIdAndCompanyData"/>
+            <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Region" Func="getCountryData"/>
+            <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Region" Func="getRegionData"/>
+            <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Region" Func="getStatesData"/>
+            <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Order" Func="getPreferencesData"/>
+            <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Order" Func="getSearchIdData"/>
+            <ReturnPage>/templates/Cust_Info/createOrderView.xsl</ReturnPage>
+            <JspPage>/jsp/display.jsp</JspPage>
+        </Page>
+    </Page>
+    </Menu>
+
+  <Menu name="View Order Info" desc="Menu">
+    <Page name="Start Page">
+    <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Customer" Func="getCustIdAndCompanyData"/>
+    <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Customer" Func="getCustomerName"/>
+         <ReturnPage>/templates/Cust_Info/viewOrder.xsl</ReturnPage>
+        <JspPage>/jsp/display.jsp</JspPage>
+        <Page name="Orders Page">
+            <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Customer" Func="getCustIdAndCompanyData"/>
+        <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Customer" Func="getCustomerName"/>
+                <WorkBean Bean="com.thomsonreuters.listsales.pelotons.ViewOrder" Func="getOrderData"/>
+              <ReturnPage>/templates/Cust_Info/viewOrder.xsl</ReturnPage>
+            <JspPage>/jsp/display.jsp</JspPage>
+        </Page>
+    </Page>
+    </Menu>
+
+  <Menu name="View Results Info" desc="Menu">
+    <Page name="Start Page">
+    <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Results" Func="getOrderData"/>
+        <ReturnPage>/templates/Cust_Info/orderResults.xsl</ReturnPage>
+        <JspPage>/jsp/display.jsp</JspPage>
+        <Page name="Results Page">
+                <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Results" Func="setResultsInfo"/>
+        <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Results" Func="getOrderData"/>
+        <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Results" Func="getCompanyContactData"/>
+        <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Results" Func="getPreferencesData"/>
+                <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Results" Func="getSearchData"/>
+                <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Results" Func="getProfileData"/>
+                <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Results" Func="getExtractData"/>
+                <ReturnPage>/templates/Cust_Info/orderResults.xsl</ReturnPage>
+            <JspPage>/jsp/display.jsp</JspPage>
+        </Page>
+    </Page>
+    </Menu>
+
+   <Menu name="Stop Address Info" desc="Menu">
+    <Page name="Start Page">
+    <WorkBean Bean="com.thomsonreuters.listsales.pelotons.StopAddress" Func="getCountriesData"/>
+        <ReturnPage>/templates/Cust_Info/stopAddress.xsl</ReturnPage>
+        <JspPage>/jsp/display.jsp</JspPage>
+        <Page name="Stop Address Page">
+        <WorkBean Bean="com.thomsonreuters.listsales.pelotons.StopAddress" Func="getCountriesData"/>
+        <WorkBean Bean="com.thomsonreuters.listsales.pelotons.StopAddress" Func="getAddressData"/>
+        <WorkBean Bean="com.thomsonreuters.listsales.pelotons.StopAddress" Func="saveStopAddressData"/>
+                <ReturnPage>/templates/Cust_Info/stopAddress.xsl</ReturnPage>
+            <JspPage>/jsp/display.jsp</JspPage>
+        </Page>
+    </Page>
+    </Menu>
+
+  <Menu name="Regions" desc="Menu">
+    <Page name="Start Page">
+        <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Region" Func="getCountryAndRegionData"/>
+    <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Region" Func="getCountryData"/>
+    <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Region" Func="getRegionData"/>
+        <ReturnPage>/templates/Cust_Info/regionInfo.xsl</ReturnPage>
+        <JspPage>/jsp/display.jsp</JspPage>
+    <Page name="Region Page">
+          <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Region" Func="setRegionInfo"/>
+          <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Region" Func="getCountryAndRegionData"/>
+      <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Region" Func="getCountryData"/>
+      <WorkBean Bean="com.thomsonreuters.listsales.pelotons.Region" Func="getRegionData"/>
+          <ReturnPage>/templates/Cust_Info/regionInfo.xsl</ReturnPage>
+          <JspPage>/jsp/display.jsp</JspPage>
+    </Page>
+    </Page>
+    </Menu>
+</D2W>

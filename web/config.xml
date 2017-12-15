@@ -1,0 +1,161 @@
+<?xml version="1.0"?>
+<D2W>
+    <DataSrc name="DB2" desc="Data Source">
+      <!-- <Driver>COM.ibm.db2.jdbc.net.DB2Driver</Driver> -->
+  <Driver>com.ibm.db2.jcc.DB2Driver</Driver>
+      <Url>jdbc:db2://sandbox.isinet.com:3754/listdb</Url>
+      <!-- <Url>jdbc:db2://sandbox.isinet.com:3579/listdb</Url> -->
+      <Userid>txtsrch</Userid>
+      <Password>ts957</Password>
+      <InitConnections>2</InitConnections>
+      <MaxConnections>5</MaxConnections>
+      <WaitIfBusy>true</WaitIfBusy>
+    </DataSrc>
+    <DataSrc name="XML">
+    </DataSrc>
+
+  <!-- if Menu is not passed from the request, Independent Page will be called, if Page is not passed neither, the Begin Page will be called -->
+    <Page name="Begin Page" desc="Independent Page">
+      <!-- return page can be a html file or an xsl file (template) -->
+      <!-- if return page is a html file, no work bean will be called, html file will be displayed through jsp page-->
+      <!-- if no template specified, default xsl file will be used, which display records with head and foot, and all data it received -->
+      <ReturnPage>../html/login.html</ReturnPage>
+    </Page>
+  <Page name="Login">
+    <ReturnPage>../html/welcome.html</ReturnPage>
+    <!-- display.jsp page contains menu bar and could display possible retrived records by using template -->
+    <!-- if no jsp page specified, default jsp page will be used, which contains no menu bar, and display retrived record by using template if any -->
+    <JspPage>/ListSales/jsp/display.jsp</JspPage>
+  </Page>
+  <!-- if Menu is passed, but Page is not, then the Start Page under the menu will be called -->
+  <!-- if both Menu and Page passed, the Page under the Menu will be called -->
+
+    <Menu name="Customer Information" desc="Menu">
+  <Page name="Start Page">
+    <WorkBean Bean="pelotons.Customer" Func="getCustIdAndCompanyData"/>
+    <WorkBean Bean="pelotons.Customer" Func="getMaxCustomerIdData"/>
+    <WorkBean Bean="pelotons.Region" Func="getCountryData"/>
+    <ReturnPage>/trmtrack/LS/D2W/webApplication/templates/Cust_Info/custInfo.xsl</ReturnPage>
+    <JspPage>/ListSales/jsp/display.jsp</JspPage>
+    <Page name="Cust Info Page">
+        <WorkBean Bean="pelotons.Customer" Func="setCustInfo"/>
+        <WorkBean Bean="pelotons.Customer" Func="getContactData"/>
+        <WorkBean Bean="pelotons.Customer" Func="getCustIdAndCompanyData"/>
+      <WorkBean Bean="pelotons.Region" Func="getCountryData"/>
+      <ReturnPage>/trmtrack/LS/D2W/webApplication/templates/Cust_Info/custInfo.xsl</ReturnPage>
+      <JspPage>/ListSales/jsp/display.jsp</JspPage>
+    </Page>
+    <Page name="Cust Info Page View">
+        <WorkBean Bean="pelotons.Customer" Func="getCustIdAndCompanyData"/>
+      <WorkBean Bean="pelotons.Region" Func="getCountryData"/>
+      <ReturnPage>/trmtrack/LS/D2W/webApplication/templates/Cust_Info/custInfoView.xsl</ReturnPage>
+      <JspPage>/ListSales/jsp/display.jsp</JspPage>
+    </Page>
+  </Page>
+    </Menu>
+  <Menu name="Create Order" desc="Menu">
+    <Page name="Start Page">
+    <WorkBean Bean="pelotons.Order" Func="getMaxOrderIdData"/>
+  <!-- Req 2  <WorkBean Bean="pelotons.Order" Func="getAllOrderIdsData"/> Requirement 2-->
+    <WorkBean Bean="pelotons.Customer" Func="getActiveCustIdAndCompanyData"/>
+    <WorkBean Bean="pelotons.Customer" Func="getContactData"/>
+        <WorkBean Bean="pelotons.Region" Func="getCountryData"/>
+        <WorkBean Bean="pelotons.Region" Func="getRegionData"/>
+        <WorkBean Bean="pelotons.Region" Func="getStatesData"/>
+        <ReturnPage>/trmtrack/LS/D2W/webApplication/templates/Cust_Info/createOrder.xsl</ReturnPage>
+        <JspPage>/ListSales/jsp/display.jsp</JspPage>
+    <Page name="Create Page">
+            <WorkBean Bean="pelotons.Order" Func="setOrderInfo"/>
+  <!-- req 2    <WorkBean Bean="pelotons.Order" Func="getAllOrderIdsData"/>Requirement 2 -->
+        <WorkBean Bean="pelotons.Customer" Func="getActiveCustIdAndCompanyData"/>
+      <WorkBean Bean="pelotons.Region" Func="getCountryData"/>
+      <WorkBean Bean="pelotons.Region" Func="getRegionData"/>
+          <WorkBean Bean="pelotons.Region" Func="getStatesData"/>
+            <WorkBean Bean="pelotons.Order" Func="getPreferencesData"/>
+            <WorkBean Bean="pelotons.Order" Func="getSearchIdData"/>
+            <ReturnPage>/trmtrack/LS/D2W/webApplication/templates/Cust_Info/editOrder.xsl</ReturnPage>
+            <JspPage>/ListSales/jsp/display.jsp</JspPage>
+        </Page>
+    <Page name="Create Page View">
+            <WorkBean Bean="pelotons.Order" Func="setOrderInfo"/>
+       <!-- Req 3     <WorkBean Bean="pelotons.Order" Func="getAllOrderIdsData"/> -->
+            <WorkBean Bean="pelotons.Customer" Func="getActiveCustIdAndCompanyData"/>
+            <WorkBean Bean="pelotons.Region" Func="getCountryData"/>
+            <WorkBean Bean="pelotons.Region" Func="getRegionData"/>
+            <WorkBean Bean="pelotons.Region" Func="getStatesData"/>
+            <WorkBean Bean="pelotons.Order" Func="getPreferencesData"/>
+            <WorkBean Bean="pelotons.Order" Func="getSearchIdData"/>
+            <ReturnPage>/trmtrack/LS/D2W/webApplication/templates/Cust_Info/createOrderView.xsl</ReturnPage>
+            <JspPage>/ListSales/jsp/display.jsp</JspPage>
+        </Page>
+    </Page>
+    </Menu>
+
+  <Menu name="View Order Info" desc="Menu">
+    <Page name="Start Page">
+    <WorkBean Bean="pelotons.Customer" Func="getCustIdAndCompanyData"/>
+    <WorkBean Bean="pelotons.Customer" Func="getCustomerName"/>
+         <ReturnPage>/trmtrack/LS/D2W/webApplication/templates/Cust_Info/viewOrder.xsl</ReturnPage>
+        <JspPage>/ListSales/jsp/display.jsp</JspPage>
+        <Page name="Orders Page">
+            <WorkBean Bean="pelotons.Customer" Func="getCustIdAndCompanyData"/>
+        <WorkBean Bean="pelotons.Customer" Func="getCustomerName"/>
+                <WorkBean Bean="pelotons.ViewOrder" Func="getOrderData"/>
+              <ReturnPage>/trmtrack/LS/D2W/webApplication/templates/Cust_Info/viewOrder.xsl</ReturnPage>
+            <JspPage>/ListSales/jsp/display.jsp</JspPage>
+        </Page>
+    </Page>
+    </Menu>
+
+  <Menu name="View Results Info" desc="Menu">
+    <Page name="Start Page">
+    <WorkBean Bean="pelotons.Results" Func="getOrderData"/>
+        <ReturnPage>/trmtrack/LS/D2W/webApplication/templates/Cust_Info/orderResults.xsl</ReturnPage>
+        <JspPage>/ListSales/jsp/display.jsp</JspPage>
+        <Page name="Results Page">
+                <WorkBean Bean="pelotons.Results" Func="setResultsInfo"/>
+        <WorkBean Bean="pelotons.Results" Func="getOrderData"/>
+        <WorkBean Bean="pelotons.Results" Func="getCompanyContactData"/>
+        <WorkBean Bean="pelotons.Results" Func="getPreferencesData"/>
+                <WorkBean Bean="pelotons.Results" Func="getSearchData"/>
+                <WorkBean Bean="pelotons.Results" Func="getProfileData"/>
+                <WorkBean Bean="pelotons.Results" Func="getExtractData"/>
+                <ReturnPage>/trmtrack/LS/D2W/webApplication/templates/Cust_Info/orderResults.xsl</ReturnPage>
+            <JspPage>/ListSales/jsp/display.jsp</JspPage>
+        </Page>
+    </Page>
+    </Menu>
+
+   <Menu name="Stop Address Info" desc="Menu">
+    <Page name="Start Page">
+    <WorkBean Bean="pelotons.StopAddress" Func="getCountriesData"/>
+        <ReturnPage>/trmtrack/LS/D2W/webApplication/templates/Cust_Info/stopAddress.xsl</ReturnPage>
+        <JspPage>/ListSales/jsp/display.jsp</JspPage>
+        <Page name="Stop Address Page">
+        <WorkBean Bean="pelotons.StopAddress" Func="getCountriesData"/>
+        <WorkBean Bean="pelotons.StopAddress" Func="getAddressData"/>
+        <WorkBean Bean="pelotons.StopAddress" Func="saveStopAddressData"/>
+                <ReturnPage>/trmtrack/LS/D2W/webApplication/templates/Cust_Info/stopAddress.xsl</ReturnPage>
+            <JspPage>/ListSales/jsp/display.jsp</JspPage>
+        </Page>
+    </Page>
+    </Menu>
+
+  <Menu name="Regions" desc="Menu">
+    <Page name="Start Page">
+        <WorkBean Bean="pelotons.Region" Func="getCountryAndRegionData"/>
+    <WorkBean Bean="pelotons.Region" Func="getCountryData"/>
+    <WorkBean Bean="pelotons.Region" Func="getRegionData"/>
+        <ReturnPage>/trmtrack/LS/D2W/webApplication/templates/Cust_Info/regionInfo.xsl</ReturnPage>
+        <JspPage>/ListSales/jsp/display.jsp</JspPage>
+    <Page name="Region Page">
+          <WorkBean Bean="pelotons.Region" Func="setRegionInfo"/>
+          <WorkBean Bean="pelotons.Region" Func="getCountryAndRegionData"/>
+      <WorkBean Bean="pelotons.Region" Func="getCountryData"/>
+      <WorkBean Bean="pelotons.Region" Func="getRegionData"/>
+          <ReturnPage>/trmtrack/LS/D2W/webApplication/templates/Cust_Info/regionInfo.xsl</ReturnPage>
+          <JspPage>/ListSales/jsp/display.jsp</JspPage>
+    </Page>
+    </Page>
+    </Menu>
+</D2W>

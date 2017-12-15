@@ -1,0 +1,29 @@
+# Mac stuff
+.DS_Store
+
+
+# Maven stuff
+target/
+test-reports/
+# WEB-INF   # some files appear to be built and some are in svn in s1m
+
+
+# Gradle stuff
+.gradle/
+build/
+gradle/
+gradlew
+gradlew.bat
+
+
+# InteliJ stuff
+*/.idea
+*/*iml
+
+
+# Eclipse stuff
+.metadata
+.classpath
+.project
+.settings
+bin/

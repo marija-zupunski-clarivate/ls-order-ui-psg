@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="ListSales" default="deploy_expanded" basedir=".">
+  <property environment="env"/>
+  <property file="build.properties"/>
+  <property file="${user.home}/build.properties"/>
+  <property name="webserver.home" value="${env.CATALINA_HOME}" />
+  <property name="webserver.commonlib.subdir" value="lib" />
+  <property name="webserver.commonlib.dir" value="${webserver.home}/${webserver.commonlib.subdir}" />
+  <property name="webserver.serverlib.subdir" value="lib" />
+  <property name="webserver.serverlib.dir" value="${webserver.home}/${webserver.serverlib.subdir}" />
+  <property name="webserver.deploy.dir" value="${webserver.home}/${webserver.deploy.subdir}" />
+  <echo message="webserver.deploy.dir = ${webserver.deploy.dir}"/>
+  <!-- change these to suit environment -->
+  <!-- property name="jdk.home"         value="c:/j2dk1.4.2_04"/ -->
+
+  <!-- catalina (tomcat 5) setup -->
+  <property name="product" value="${product}" />
+
+  <!-- project structure - should not have to modify -->
+  <property name="src.dir"   value="src"/>
+  <property name="web.dir"   location="${basedir}/web"/>
+  <property name="build.dir" value="build"/>
+  <property name="dist.dir"  location="${basedir}/dist"/>
+  <property name="lib.dir"   value="lib"/>
+  <property name="javadocs.dir"   value="docs"/>
+  <property name="test.dir"   value="test" />
+
+  <!-- CLASSPATH used during compilation -->
+  <path id="build.classpath">
+
+     <fileset dir="lib">
+            <include name="*.jar"/>
+     </fileset>
+
+    <!-- Servlet Container's specific stuff -->
+    <pathelement  location="${webserver.commonlib.dir}/servlet-api.jar" />
+    <pathelement  location="${webserver.commonlib.dir}/jsp-api.jar" />
+    <pathelement  location="${webserver.commonlib.dir}/serializer.jar" />
+    <pathelement  location="${webserver.commonlib.dir}/xml-apis.jar" />
+    <pathelement  location="${webserver.commonlib.dir}/xsltc.jar" />
+    <pathelement  location="${webserver.commonlib.dir}/xalan.jar" />
+    <pathelement  location="${webserver.commonlib.dir}/xercesImpl.jar" />
+    <pathelement path="${test.dir}" />
+  </path>
+
+
+
+  <path id="test.classpath">
+     <fileset dir="${webserver.commonlib.dir}" includes="*.jar"/>
+     <fileset dir="lib" includes="*.jar"/>
+      <fileset dir="testlib" includes="*.jar" />
+  </path>
+
+  <target name="cleanup_jsp" if="cleanup_jsp">
+    <echo>Cleaning up JSP files (for the underlying build only) ...</echo>
+
+    <!-- replace whitespace -->
+    <echo>Removing white spaces ...</echo>
+    <replaceregexp match="\s+" replace=" " flags="g" byline="true">
+        <fileset dir="${dist.dir}/${product}" includes="**/*.jsp"/>
+    </replaceregexp>
+
+    <echo>Removing html comments ...</echo>
+    <!-- remove html comments -->
+    <replaceregexp match="&lt;!--(.*)--&gt;" replace="" flags="g" byline="true">
+        <fileset dir="${dist.dir}/${product}" includes="**/*.jsp"/>
+    </replaceregexp>
+
+    <!-- remove jsp comments -->
+    <echo>Removing JSP comments ...</echo>
+    <replaceregexp match="&lt;%--(.*)--%&gt;" replace="" flags="g" byline="true">
+        <fileset dir="${dist.dir}/${product}" includes="**/*.jsp"/>
+    </replaceregexp>
+
+    <!-- remove newlines(not working?) -->
+    <replaceregexp match="\n+" replace="" flags="g" byline="true">
+        <fileset dir="${dist.dir}/${product}" includes="**/*.jsp"/>
+    </replaceregexp>
+
+    <replaceregexp match="(\n|\r|&#13;|&#10;)" replace="" flags="gs" byline="false">
+        <fileset dir="${dist.dir}/${product}" includes="**/*.jsp"/>
+    </replaceregexp>
+  </target>
+
+  <!-- Pre-compilation rule -->
+  <target name="prepare">
+    <tstamp/>
+    <mkdir dir="${build.dir}" />
+    <mkdir dir="${dist.dir}" />
+    <mkdir dir="${dist.dir}/${product}" />
+    <mkdir dir="${webserver.home}/logs" />
+    <mkdir dir="${test.dir}" />
+
+        <antcall target="framework_override"/>
+  </target>
+
+  <!-- Compiling rule -->
+  <property name="debug" value="${javac.debug}"/>
+
+  <target name="compile" depends="prepare">
+    <echo>Compiling java files to build directory...</echo>
+    <javac  destdir="${build.dir}"  source="1.5" target="1.5" deprecation="on"  debug="${debug}" >
+      <classpath refid="build.classpath" />
+      <src path="${src.dir}" />
+    </javac>
+
+    <echo>Copying resource files to build directory...</echo>
+        <copy todir="${build.dir}" overwrite="true">
+        <fileset dir="${src.dir}">
+          <include name="**/*.properties" />
+          <include name="**/*.xml" />
+        </fileset>
+      </copy>
+  </target>
+
+
+<target name="framework_override" if="framework.override">
+
+<delete>
+<fileset dir="lib" casesensitive="yes">
+  <include name="ts-framework*.jar"/>
+</fileset>
+ </delete>
+
+    <copy todir="${lib.dir}" overwrite="true" >
+        <fileset file="${framework.override}" />
+    </copy>
+</target>
+
+
+  <!-- Deploy rule -->
+  <target name="build_common" depends="compile">
+    <echo>Copying files to dist directory...</echo>
+    <copy todir="${dist.dir}/${product}" overwrite="true" >
+          <fileset dir="${web.dir}" includes="**/*" />
+      </copy>
+        <copy todir="${dist.dir}/${product}/WEB-INF/classes" overwrite="true" >
+            <fileset dir="${build.dir}" includes="**/*" />
+        </copy>
+    <copy todir="${dist.dir}/${product}/WEB-INF/lib" overwrite="true" >
+        <fileset dir="${lib.dir}" includes="**/*" />
+    </copy>
+
+  </target>
+
+
+  <target name="build" depends="build_common,cleanup_jsp">
+    <echo>Copy web files to server deployment dir...</echo>
+    <copy todir="${webserver.deploy.dir}" overwrite="true" >
+        <fileset dir="${dist.dir}" includes="${product}/**/*" />
+    </copy>
+  </target>
+
+  <target name="deploy_expanded" depends="clean_all,dev,build" />
+
+
+
+  <!--  WAR rules  -->
+  <target name="war" depends="clean_build,build_common,cleanup_jsp">
+    <echo>Building war file...</echo>
+    <war warfile="${dist.dir}/${product}.war" webxml="${web.dir}/WEB-INF/web.xml">
+      <fileset dir="${dist.dir}/${product}" includes="**/*" excludes="WEB-INF/web.xml" />
+    </war>
+  </target>
+  <target name="devwar" depends="dev,war">
+  </target>
+
+  <target name="prodwar" depends="prod,war">
+  </target>
+
+  <target name="deploy_war" depends="devwar">
+    <echo>Copy war file to deployment dir...</echo>
+      <copy file="${dist.dir}/${product}.war" todir="${webserver.deploy.dir}" overwrite="true"/>
+  </target>
+
+
+  <!--jar file target -->
+  <target name="jar" depends="clean_build,prepare">
+
+    <echo>Compiling java files to build directory...</echo>
+        <javac  destdir="${build.dir}"
+          source="1.5"
+          target="1.5"
+          deprecation="on"
+          debug="${debug}" >
+            <classpath refid="build.classpath" />
+            <src path="${src.dir}" />
+        </javac>
+
+        <echo>Copying resource files to build directory...</echo>
+        <copy todir="${build.dir}" overwrite="true">
+          <fileset dir="${src.dir}">
+            <include name="**/*.properties" />
+            <include name="**/*.xml" />
+          </fileset>
+        </copy>
+    <echo>Building jar file...</echo>
+          <jar destfile="${dist.dir}/${product}.jar"
+              basedir="${build.dir}" />
+    </target>
+
+  <target name="releases.docs.zip"  description="Universal Application"  depends="compile,clean_docs">
+    <echo message="Building docs directory..." />
+    <mkdir dir="${javadocs.dir}"/>
+
+    <javadoc  sourcepath="${src.dir}"
+            destdir="${javadocs.dir}"
+          packagenames="*"
+                author="true"
+            version="true"
+                windowtitle="Universal Application">
+
+      <classpath refid="build.classpath"/>
+    </javadoc>
+  </target>
+
+
+  <target name="build_test" depends="compile">
+    <echo message="Building test directory..." />
+    <mkdir dir="test_build"/>
+    <javac  destdir="test_build"  deprecation="on" debug="${debug}" >
+       <classpath>
+         <fileset dir="lib">
+                <include name="*.jar"/>
+         </fileset>
+
+         <fileset dir="testlib">
+                  <include name="*.jar"/>
+           </fileset>
+
+
+            <fileset dir="${webserver.commonlib.dir}" includes="*.jar"/>
+          </classpath>
+      <src path="${src.dir}" />
+      <src path="test/src" />
+    </javac>
+  </target>
+
+  <target name="test" depends="build_test">
+
+     <!--<junit haltonfailure="yes">-->
+       <junit>
+        <sysproperty key="basedir" value="${basedir}"/>
+
+          <classpath>
+         <fileset dir="testlib" includes="*.jar"/>
+            <fileset dir="${webserver.commonlib.dir}" includes="*.jar"/>
+            <fileset dir="lib" includes="*.jar"/>
+            <pathelement location="test_build"/>
+            <pathelement location="test/src"/>
+          <pathelement location="."/>
+          </classpath>
+         <formatter type="brief" usefile="no"/>
+       <formatter type="xml" usefile="yes"/>
+          <test name="com.thomson.ts.ua.test.UATestSuite" />
+        </junit>
+
+                   <mkdir dir="reports" />
+                    <junitreport todir="./reports">
+                      <fileset dir=".">
+                        <include name="TEST-*.xml"/>
+                      </fileset>
+                  <report format="noframes" todir="./reports"/>
+                </junitreport>
+
+  </target>
+
+  <target name="test_cc" depends="test" />
+
+  <!-- Clean compilation remnants -->
+  <target name="clean_build">
+      <echo message="Clean build and dist directories ..." />
+    <delete dir="${build.dir}"/>
+    <delete dir="${dist.dir}" />
+  </target>
+
+
+  <target name="clean_test" depends="clean_build" >
+    <echo message="Clean test directory..." />
+    <delete dir="test_build" >
+    </delete>
+  </target>
+
+
+  <target name="clean_docs" >
+    <echo message="Clean docs directory..." />
+    <delete includeemptydirs="true" quiet="true">
+      <fileset dir="${javadocs.dir}" includes="**/*"/>
+    </delete>
+  </target>
+
+  <target name="clean_deployment" depends="clean_build">
+    <echo message="Clean deployment directory or war file..." />
+    <delete dir="${webserver.deploy.dir}/${product}" />
+    <delete file="${webserver.deploy.dir}/${product}.war" />
+    <delete dir="${webserver.home}/logs" />
+    <delete dir="${webserver.home}/work/Catalina/${host}/${product}" />
+  </target>
+
+  <!-- Completely clean all compilation results -->
+  <target name="clean_all" depends="clean_deployment, clean_docs, clean_test">
+  </target>
+
+
+<!-- Installation, Deployment, Start, Stop, Restart etc -->
+
+<!-- Configure the context path for this application -->
+  <property name="path" value="/${product}"/>
+
+<!-- Configure properties to access the Manager application -->
+  <property name="url"      value="${manager.url}"/>
+
+  <path id="tomcat.tasks" location="${webserver.serverlib.dir}/catalina-ant.jar"/>
+  <!-- "install" and "remove" are deprecated -->
+  <taskdef name="deploy" classname="org.apache.catalina.ant.DeployTask" classpathref="tomcat.tasks"/>
+  <taskdef name="undeploy" classname="org.apache.catalina.ant.UndeployTask" classpathref="tomcat.tasks"/>
+  <taskdef name="reload"   classname="org.apache.catalina.ant.ReloadTask" classpathref="tomcat.tasks"/>
+  <taskdef name="list" classname="org.apache.catalina.ant.ListTask" classpathref="tomcat.tasks"/>
+  <taskdef name="start" classname="org.apache.catalina.ant.StartTask" classpathref="tomcat.tasks"/>
+  <taskdef name="stop" classname="org.apache.catalina.ant.StopTask" classpathref="tomcat.tasks"/>
+
+  <target name="deploy" description="Deploy ${product} application" depends="war">
+  <!-- deploy url="${url}" path="${path}" war="file:${build}/wok.war" username="${username}"  password="${password}" / -->
+  <deploy url="${url}" path="${path}" war="file:${dist.dir}/${product}.war" username="${username}"  password="${password}" />
+  </target>
+
+  <target name="undeploy" description="Undeploy ${product} application" >
+  <undeploy url="${url}" path="${path}"   username="${username}" password="${password}" />
+  </target>
+
+  <target name="reload" description="Reload ${product} application">
+  <reload url="${url}" path="${path}"  username="${username}" password="${password}" />
+  </target>
+
+  <target name="start" description="Start ${product} application">
+  <start url="${url}" path="${path}"  username="${username}" password="${password}" />
+  </target>
+
+  <target name="stop" description="Stop ${product} application">
+  <stop url="${url}" path="${path}"  username="${username}" password="${password}" />
+  </target>
+
+  <target name="list" description="List all applications on the server" >
+  <list url="${url}"  username="${username}" password="${password}" />
+  </target>
+
+
+<target name="clean" description="clean out dist dir">
+  <delete dir="${dist.dir}" />
+
+</target>
+
+<target name="dev" description="configure for dev">
+  <copy file="conf/context.xml.config" tofile="conf/context.xml" overwrite="true" />
+  <replace file="conf/context.xml" replacefilterfile="conf/dev.properties"/>
+  <copy file="conf/context.xml" tofile="web/META-INF/context.xml" overwrite="true" />
+
+  <copy file="conf/email-config.xml.config" tofile="conf/email-config.xml" overwrite="true" />
+  <replace file="conf/email-config.xml" replacefilterfile="conf/dev.properties"/>
+  <copy file="conf/email-config.xml" tofile="src/com/thomson/ts/listsales/service/net/config/email-config.xml" overwrite="true" />
+</target>
+
+<target name="prod" description="configure for production">
+  <copy file="conf/context.xml.config" tofile="conf/context.xml" overwrite="true" />
+  <replace file="conf/context.xml" replacefilterfile="conf/prod.properties"/>
+  <copy file="conf/context.xml" tofile="web/META-INF/context.xml" overwrite="true" />
+
+  <copy file="conf/email-config.xml.config" tofile="conf/email-config.xml" overwrite="true" />
+  <replace file="conf/email-config.xml" replacefilterfile="conf/prod.properties"/>
+  <copy file="conf/email-config.xml" tofile="src/com/thomson/ts/listsales/service/net/config/email-config.xml" overwrite="true" />
+</target>
+
+</project>

@@ -1,0 +1,119 @@
+.no-titlebar .ui-dialog-titlebar {
+    display: none;
+}
+
+BODY
+{
+    BACKGROUND-COLOR: white;
+    COLOR: black;
+    FONT-FAMILY: 'Times New Roman'
+}
+H1
+{
+    COLOR: navy;
+    FONT-FAMILY: 'Times New Roman';
+    FONT-SIZE: x-large;
+    FONT-WEIGHT: bolder;
+    text-align: center;
+    TEXT-TRANSFORM: capitalize
+}
+H2
+{
+    COLOR: maroon;
+    FONT-FAMILY: 'Times New Roman';
+    FONT-SIZE: large;
+    FONT-WEIGHT: bolder;
+    text-align: center;
+    TEXT-TRANSFORM: capitalize
+}
+H3
+{
+    COLOR: teal;
+    FONT-FAMILY: 'Times New Roman';
+    FONT-SIZE: large;
+    FONT-WEIGHT: lighter;
+    text-align: left;
+    TEXT-TRANSFORM: capitalize
+}
+
+H4
+{
+    COLOR: maroon;
+    FONT-FAMILY: 'Times New Roman';
+    FONT-SIZE: medium;
+    FONT-WEIGHT: lighter;
+    text-align: center;
+    TEXT-TRANSFORM: capitalize
+}
+
+A
+{
+  COLOR: blue;
+  font-style: normal;
+  font-size: small;
+  font-family: 'Times New Roman';
+}
+A:link {
+COLOR: #0000FF;
+}
+A:hover {
+COLOR: #993300;
+
+}
+A:active {
+COLOR: #993300;
+}
+
+
+.summaryTable 
+{ 
+  empty-cells: show; 
+  text-align: center;
+    background: white; 
+}
+
+.sumClass
+{
+    background: #FFFFCC; 
+    font-size: x-small;
+    text-align: left;
+}
+
+.titleClass
+{
+  font-size: small;
+  text-align: center;
+}
+
+.breakdownBox 
+{  
+    background: #F9F9F2; 
+  padding: 8px 4px; 
+  text-align: center; 
+  vertical-align: middle;
+  border-top-color: #999999;
+  border-top-width: 2px;
+  border-top-style: solid;
+}
+
+.countryBox 
+{ 
+  background: #E3EEFB; 
+  padding: 8px 4px; 
+  text-align: center; 
+  vertical-align: middle;
+  border-top-color: #000099;
+  border-top-width: 2px;
+  border-top-style: solid; 
+}
+
+.stateBox 
+{ 
+    background: #E3EEFB; 
+  padding: 8px 4px; 
+  text-align: center; 
+  vertical-align: middle;
+  border-top-color: #000099;
+  border-top-width: 2px;
+  border-top-style: solid; 
+}

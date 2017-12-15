@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!-- See javadoc in com.thomson.ts.framework.config.GenericControl  for details -->
+<items>
+  <item name="newEmail">
+    <property   name="mail.smtp.host"       value="localhost" />
+    <property   name="mail.transport.protocol"    value="SMTP" />
+    <property   name="sessionDebug"         value="false" />
+    <property   name="subjectPrefix"        value="[Test]List Sales:" />
+
+  </item>
+  <item name="newCustomerEmail" extends="newEmail">
+    <property   name="fromAddress"          value="jeffrey.cruz@thomsonreuters.com" />
+    <property   name="toAddress"          value="jeffrey.cruz@thomsonreuters.com,liesheng.long@thomsonreuters.com" />
+
+  </item>
+
+  <item name="newOrderEmail" extends="newEmail">
+    <property   name="toAddress"
+      value="indu.mudigonda@isinet.com,gopala.kuntamukkula@isinet.com,lsdev@isinet.com,liesheng.long@thomsonreuters.com" />
+    <property   name="fromAddress"
+      value="indu.mudigonda@isinet.com" />
+  </item>
+
+</items>
