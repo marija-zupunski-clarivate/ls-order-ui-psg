@@ -29,7 +29,7 @@
   </logger>
 
   <root>
-    <level value="error"/>
+    <level value="info"/>
     <!-- appender-ref ref="stdout"/ -->
     <appender-ref ref="rolling"/>
   </root>
