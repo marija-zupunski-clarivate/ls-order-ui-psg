@@ -9,11 +9,11 @@
     handler="com.thomson.ts.framework.service.net.EmailHandler">
     <init-param>
       <param-name>default_rules_file</param-name>
-         <param-value>main/java/com/thomson/ts/framework/config/digester/rules.xml</param-value>
+         <param-value>com/thomson/ts/framework/config/digester/rules.xml</param-value>
        </init-param>
     <init-param>
       <param-name>app_data_file</param-name>
-         <param-value>main/java/com/thomson/ts/listsales/service/net/config/email-config.xml</param-value>
+         <param-value>com/thomson/ts/listsales/service/net/config/email-config.xml</param-value>
        </init-param>
    </service>
 </services>

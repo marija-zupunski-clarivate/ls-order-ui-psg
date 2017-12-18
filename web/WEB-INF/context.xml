@@ -24,18 +24,19 @@
     <!--
       validationQuery: values 1
      -->
+     
 
   <Resource name="jdbc/listDB"
         auth="Container"
         type="javax.sql.DataSource"
         initialSize="1"
-            maxActive="20"
-            maxIdle="5"
+            maxActive="@jdbc.conn.maxActive@"
+            maxIdle="@jdbc.conn.maxIdle@"
             maxWait="10000"
-            username="txtsrch"
-            password="ts957"
+            username="@jdbc.user@"
+            password="@jdbc.password@"
             driverClassName="com.ibm.db2.jcc.DB2Driver"
-            url="jdbc:db2://dfplusi.isinet.com:50010/LISTDB"
+            url="@jdbc.url@"
             testOnBorrow="true"
             validationQuery="values 1"
             logAbandoned="true"

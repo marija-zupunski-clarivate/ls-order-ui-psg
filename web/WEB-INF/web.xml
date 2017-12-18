@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <web-app xmlns="http://java.sun.com/xml/ns/javaee"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
     version="2.5">
 
   <display-name>ListSales ver 2.2</display-name>
@@ -24,12 +23,10 @@
 
   <servlet>
     <servlet-name>Driver</servlet-name>
-    <display-name>Driver</display-name>
     <servlet-class>main.java.com.thomsonreuters.listsales.servlet.Driver</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>Export</servlet-name>
-    <display-name>Export</display-name>
     <servlet-class>main.java.com.thomsonreuters.listsales.servlet.Export</servlet-class>
   </servlet>
 
@@ -62,7 +59,7 @@
   </resource-ref>
 
   <listener>
-    <listener-class>main.java.com.thomson.ts.framework.control.ContextListener</listener-class>
+    <listener-class>com.thomson.ts.framework.control.ContextListener</listener-class>
   </listener>
 
    <security-role>
