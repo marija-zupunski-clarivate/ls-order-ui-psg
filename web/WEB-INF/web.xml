@@ -18,7 +18,7 @@
 
   <context-param>
     <param-name>CONFIG_FILE</param-name>
-    <param-value>WEB-INF/config.xml</param-value>
+    <param-value>WEB-INF/classes/config.xml</param-value>
   </context-param>
 
   <servlet>
