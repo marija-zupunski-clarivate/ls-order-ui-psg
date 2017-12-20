@@ -19,18 +19,18 @@
 
   <context-param>
     <param-name>CONFIG_FILE</param-name>
-    <param-value>WEB-INF/config.xml</param-value>
+    <param-value>config.xml</param-value>
   </context-param>
 
   <servlet>
     <servlet-name>Driver</servlet-name>
     <display-name>Driver</display-name>
-    <servlet-class>main.java.com.thomsonreuters.listsales.servlet.Driver</servlet-class>
+    <servlet-class>com.thomsonreuters.listsales.servlet.Driver</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>Export</servlet-name>
     <display-name>Export</display-name>
-    <servlet-class>main.java.com.thomsonreuters.listsales.servlet.Export</servlet-class>
+    <servlet-class>com.thomsonreuters.listsales.servlet.Export</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -62,7 +62,7 @@
   </resource-ref>
 
   <listener>
-    <listener-class>main.java.com.thomson.ts.framework.control.ContextListener</listener-class>
+    <listener-class>com.thomson.ts.framework.control.ContextListener</listener-class>
   </listener>
 
    <security-role>

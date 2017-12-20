@@ -25,7 +25,7 @@
     <ReturnPage>../html/welcome.html</ReturnPage>
     <!-- display.jsp page contains menu bar and could display possible retrived records by using template -->
     <!-- if no jsp page specified, default jsp page will be used, which contains no menu bar, and display retrived record by using template if any -->
-    <JspPage>/ListSales/jsp/display.jsp</JspPage>
+    <JspPage>/jsp/display.jsp</JspPage>
   </Page>
   <!-- if Menu is passed, but Page is not, then the Start Page under the menu will be called -->
   <!-- if both Menu and Page passed, the Page under the Menu will be called -->
@@ -36,20 +36,20 @@
     <WorkBean Bean="pelotons.Customer" Func="getMaxCustomerIdData"/>
     <WorkBean Bean="pelotons.Region" Func="getCountryData"/>
     <ReturnPage>/trmtrack/LS/D2W/webApplication/templates/Cust_Info/custInfo.xsl</ReturnPage>
-    <JspPage>/ListSales/jsp/display.jsp</JspPage>
+    <JspPage>/jsp/display.jsp</JspPage>
     <Page name="Cust Info Page">
         <WorkBean Bean="pelotons.Customer" Func="setCustInfo"/>
         <WorkBean Bean="pelotons.Customer" Func="getContactData"/>
         <WorkBean Bean="pelotons.Customer" Func="getCustIdAndCompanyData"/>
       <WorkBean Bean="pelotons.Region" Func="getCountryData"/>
       <ReturnPage>/trmtrack/LS/D2W/webApplication/templates/Cust_Info/custInfo.xsl</ReturnPage>
-      <JspPage>/ListSales/jsp/display.jsp</JspPage>
+      <JspPage>/jsp/display.jsp</JspPage>
     </Page>
     <Page name="Cust Info Page View">
         <WorkBean Bean="pelotons.Customer" Func="getCustIdAndCompanyData"/>
       <WorkBean Bean="pelotons.Region" Func="getCountryData"/>
       <ReturnPage>/trmtrack/LS/D2W/webApplication/templates/Cust_Info/custInfoView.xsl</ReturnPage>
-      <JspPage>/ListSales/jsp/display.jsp</JspPage>
+      <JspPage>/jsp/display.jsp</JspPage>
     </Page>
   </Page>
     </Menu>
@@ -63,7 +63,7 @@
         <WorkBean Bean="pelotons.Region" Func="getRegionData"/>
         <WorkBean Bean="pelotons.Region" Func="getStatesData"/>
         <ReturnPage>/trmtrack/LS/D2W/webApplication/templates/Cust_Info/createOrder.xsl</ReturnPage>
-        <JspPage>/ListSales/jsp/display.jsp</JspPage>
+        <JspPage>/jsp/display.jsp</JspPage>
     <Page name="Create Page">
             <WorkBean Bean="pelotons.Order" Func="setOrderInfo"/>
   <!-- req 2    <WorkBean Bean="pelotons.Order" Func="getAllOrderIdsData"/>Requirement 2 -->
@@ -74,7 +74,7 @@
             <WorkBean Bean="pelotons.Order" Func="getPreferencesData"/>
             <WorkBean Bean="pelotons.Order" Func="getSearchIdData"/>
             <ReturnPage>/trmtrack/LS/D2W/webApplication/templates/Cust_Info/editOrder.xsl</ReturnPage>
-            <JspPage>/ListSales/jsp/display.jsp</JspPage>
+            <JspPage>/jsp/display.jsp</JspPage>
         </Page>
     <Page name="Create Page View">
             <WorkBean Bean="pelotons.Order" Func="setOrderInfo"/>
@@ -86,7 +86,7 @@
             <WorkBean Bean="pelotons.Order" Func="getPreferencesData"/>
             <WorkBean Bean="pelotons.Order" Func="getSearchIdData"/>
             <ReturnPage>/trmtrack/LS/D2W/webApplication/templates/Cust_Info/createOrderView.xsl</ReturnPage>
-            <JspPage>/ListSales/jsp/display.jsp</JspPage>
+            <JspPage>/jsp/display.jsp</JspPage>
         </Page>
     </Page>
     </Menu>
@@ -96,13 +96,13 @@
     <WorkBean Bean="pelotons.Customer" Func="getCustIdAndCompanyData"/>
     <WorkBean Bean="pelotons.Customer" Func="getCustomerName"/>
          <ReturnPage>/trmtrack/LS/D2W/webApplication/templates/Cust_Info/viewOrder.xsl</ReturnPage>
-        <JspPage>/ListSales/jsp/display.jsp</JspPage>
+        <JspPage>/jsp/display.jsp</JspPage>
         <Page name="Orders Page">
             <WorkBean Bean="pelotons.Customer" Func="getCustIdAndCompanyData"/>
         <WorkBean Bean="pelotons.Customer" Func="getCustomerName"/>
                 <WorkBean Bean="pelotons.ViewOrder" Func="getOrderData"/>
               <ReturnPage>/trmtrack/LS/D2W/webApplication/templates/Cust_Info/viewOrder.xsl</ReturnPage>
-            <JspPage>/ListSales/jsp/display.jsp</JspPage>
+            <JspPage>/jsp/display.jsp</JspPage>
         </Page>
     </Page>
     </Menu>
@@ -111,7 +111,7 @@
     <Page name="Start Page">
     <WorkBean Bean="pelotons.Results" Func="getOrderData"/>
         <ReturnPage>/trmtrack/LS/D2W/webApplication/templates/Cust_Info/orderResults.xsl</ReturnPage>
-        <JspPage>/ListSales/jsp/display.jsp</JspPage>
+        <JspPage>/jsp/display.jsp</JspPage>
         <Page name="Results Page">
                 <WorkBean Bean="pelotons.Results" Func="setResultsInfo"/>
         <WorkBean Bean="pelotons.Results" Func="getOrderData"/>
@@ -121,7 +121,7 @@
                 <WorkBean Bean="pelotons.Results" Func="getProfileData"/>
                 <WorkBean Bean="pelotons.Results" Func="getExtractData"/>
                 <ReturnPage>/trmtrack/LS/D2W/webApplication/templates/Cust_Info/orderResults.xsl</ReturnPage>
-            <JspPage>/ListSales/jsp/display.jsp</JspPage>
+            <JspPage>/jsp/display.jsp</JspPage>
         </Page>
     </Page>
     </Menu>
@@ -130,13 +130,13 @@
     <Page name="Start Page">
     <WorkBean Bean="pelotons.StopAddress" Func="getCountriesData"/>
         <ReturnPage>/trmtrack/LS/D2W/webApplication/templates/Cust_Info/stopAddress.xsl</ReturnPage>
-        <JspPage>/ListSales/jsp/display.jsp</JspPage>
+        <JspPage>/jsp/display.jsp</JspPage>
         <Page name="Stop Address Page">
         <WorkBean Bean="pelotons.StopAddress" Func="getCountriesData"/>
         <WorkBean Bean="pelotons.StopAddress" Func="getAddressData"/>
         <WorkBean Bean="pelotons.StopAddress" Func="saveStopAddressData"/>
                 <ReturnPage>/trmtrack/LS/D2W/webApplication/templates/Cust_Info/stopAddress.xsl</ReturnPage>
-            <JspPage>/ListSales/jsp/display.jsp</JspPage>
+            <JspPage>/jsp/display.jsp</JspPage>
         </Page>
     </Page>
     </Menu>
@@ -147,14 +147,14 @@
     <WorkBean Bean="pelotons.Region" Func="getCountryData"/>
     <WorkBean Bean="pelotons.Region" Func="getRegionData"/>
         <ReturnPage>/trmtrack/LS/D2W/webApplication/templates/Cust_Info/regionInfo.xsl</ReturnPage>
-        <JspPage>/ListSales/jsp/display.jsp</JspPage>
+        <JspPage>/jsp/display.jsp</JspPage>
     <Page name="Region Page">
           <WorkBean Bean="pelotons.Region" Func="setRegionInfo"/>
           <WorkBean Bean="pelotons.Region" Func="getCountryAndRegionData"/>
       <WorkBean Bean="pelotons.Region" Func="getCountryData"/>
       <WorkBean Bean="pelotons.Region" Func="getRegionData"/>
           <ReturnPage>/trmtrack/LS/D2W/webApplication/templates/Cust_Info/regionInfo.xsl</ReturnPage>
-          <JspPage>/ListSales/jsp/display.jsp</JspPage>
+          <JspPage>/jsp/display.jsp</JspPage>
     </Page>
     </Page>
     </Menu>
