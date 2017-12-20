@@ -23,11 +23,11 @@
 
   <servlet>
     <servlet-name>Driver</servlet-name>
-    <servlet-class>main.java.com.thomsonreuters.listsales.servlet.Driver</servlet-class>
+    <servlet-class>com.thomsonreuters.listsales.servlet.Driver</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>Export</servlet-name>
-    <servlet-class>main.java.com.thomsonreuters.listsales.servlet.Export</servlet-class>
+    <servlet-class>com.thomsonreuters.listsales.servlet.Export</servlet-class>
   </servlet>
 
   <servlet-mapping>
