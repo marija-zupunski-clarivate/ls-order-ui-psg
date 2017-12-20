@@ -17,19 +17,20 @@
       <param name="ConversionPattern" value="%d %4r [%t] %-5p %c - %m%n"/>
     </layout>
   </appender>
+<!--   %d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n -->
 
   <logger name="com.thomsonreuters.listsales" additivity="false">
-     <level value="error" />
+     <level value="debug" />
      <appender-ref ref="rolling"/>
   </logger>
 
   <logger name="com.thomson.ts" additivity="false">
-     <level value="error" />
+     <level value="debug" />
      <appender-ref ref="rolling"/>
   </logger>
 
   <root>
-    <level value="error"/>
+    <level value="debug"/>
     <!-- appender-ref ref="stdout"/ -->
     <appender-ref ref="rolling"/>
   </root>

@@ -64,8 +64,6 @@ task copyContextFile(type:Copy){
     filter(org.apache.tools.ant.filters.ReplaceTokens, tokens: envProps)
 }
 
-// ovog nema ...
-/*
 task copyConfigFile(type:Copy){
     from "conf"
     into ("web/WEB-INF")
@@ -73,16 +71,16 @@ task copyConfigFile(type:Copy){
 		rename ('config.xml.config', 'config.xml')
     filter(org.apache.tools.ant.filters.ReplaceTokens, tokens: envProps)
 }
-*/
 
-//task copyConfigFiles() {
-//	
-//}
 
-//copyConfigFiles.dependsOn('copyConfigFile')
-//copyConfigFiles.dependsOn('copyContextFile')
+task copyConfigFiles() {
+	
+}
 
-war.dependsOn('copyContextFile')
+copyConfigFiles.dependsOn('copyConfigFile')
+copyConfigFiles.dependsOn('copyContextFile')
+
+war.dependsOn('copyConfigFiles')
 
 
 repositories {
@@ -91,7 +89,7 @@ repositories {
 	maven	{ url "http://repo.oneplatform.build/nexus/content/repositories/releases/" }
 	maven	{ url "http://repo.maven.apache.org/maven2" } 
 	mavenCentral()
-
+	
 }
 
 
@@ -105,15 +103,13 @@ dependencies {
 	compile name: 'Common'
 	compile name: 'commons-collections'
 	compile name: 'CSAPI_1_0'
-	//compile name: 'db2jcc4-1.0'
+	compile name: 'db2jcc4-1.0'
 	compile name: 'jta'
 	compile name: 'mail'
 	compile name: 'saxon8'
 	compile name: 'sqlj'
 	compile name: 'ts-framework-4.0.0.2'
 	compile name: 'xercesImpl'
-	//compile name: 'servlet-api'
-
 	
 	//compile name: 'db2fs'
 	//compile name: 'db2java'
@@ -136,17 +132,18 @@ dependencies {
 	compile group: 'log4j',				name: 'log4j',				version: "1.2.17"
 	compile group: 'org.apache.poi',	name: 'poi',				version: "3.0-rc4-20070503"
 	compile group: 'org.apache.poi',	name: 'poi-scratchpad',		version: "3.0-rc4-20070503"
-
+	
+	
 }
 
 
 war {
+		
 	from ('web') {
 		include '**/*'
 		exclude 'web/WEB-INF/context.xml'
 	}
 }
-
 
 
 
