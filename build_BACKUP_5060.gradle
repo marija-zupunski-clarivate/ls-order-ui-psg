@@ -36,8 +36,6 @@ apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'war'
 
-//for Ant filter - begintoken, endtoken
-import org.apache.tools.ant.filters.ReplaceTokens
 
 
 def permanentPackageName = project.name
@@ -60,11 +58,15 @@ envProps.keySet().each { key ->
 
 task copyContextFile(type:Copy){
     from "conf"
-    into ("web/META-INF")
+    into ("web/WEB-INF")
     include('context.xml.config')
-	rename ('context.xml.config', 'context.xml')
-    filter(ReplaceTokens, tokens: envProps)
-	println('test: ' + envProps.getProperty('jdbc.user'))
+		rename ('context.xml.config', 'context.xml')
+<<<<<<< HEAD
+    filter(org.apache.tools.ant.filters.ReplaceTokens, tokens: envProps)
+=======
+    	filter(org.apache.tools.ant.filters.ReplaceTokens, tokens: envProps)
+	println('test: ' + envProps.getProperty('@jdbc.user@'))
+>>>>>>> f2d2880f16bf83c20ea28748fe7ef2876b728566
 }
 
 // ovog nema ...
@@ -91,10 +93,16 @@ war.dependsOn('copyContextFile')
 repositories {
  
  	flatDir	{ dirs 'lib', 'systemLib' }
+<<<<<<< HEAD
 	maven	{ url "http://repo.oneplatform.build/nexus/content/repositories/releases/" }
 	maven	{ url "http://repo.maven.apache.org/maven2" } 
+=======
+	/*maven	{ url "http://repo.oneplatform.build/nexus/content/repositories/releases/" }
+	maven	{ url "http://repository.primefaces.org" }
+	maven	{ url "http://repo.maven.apache.org/maven2" }*/
+>>>>>>> f2d2880f16bf83c20ea28748fe7ef2876b728566
 	mavenCentral()
-
+	
 }
 
 
@@ -115,8 +123,10 @@ dependencies {
 	compile name: 'sqlj'
 	compile name: 'ts-framework-4.0.0.2'
 	compile name: 'xercesImpl'
+<<<<<<< HEAD
+=======
 	//compile name: 'servlet-api'
-
+>>>>>>> f2d2880f16bf83c20ea28748fe7ef2876b728566
 	
 	//compile name: 'db2fs'
 	//compile name: 'db2java'
@@ -144,12 +154,23 @@ dependencies {
 
 
 war {
+		
+	from ('web') {
+<<<<<<< HEAD
+		include '**/*'
+		exclude 'web/WEB-INF/context.xml'
+=======
+		include 'index.jsp'
+	}
+	webXml = file('web/WEB-INF/web.xml')
+		
 	from ('web') {
 		include '**/*'
 		exclude 'web/WEB-INF/context.xml'
+
+>>>>>>> f2d2880f16bf83c20ea28748fe7ef2876b728566
 	}
 }
-
 
 
 
