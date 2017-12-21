@@ -142,6 +142,8 @@ dependencies {
 
 
 war {
+
+	archiveName = 'ListSales.war'
 	from ('web') {
 		include '**/*'
 		exclude 'web/WEB-INF/context.xml'
