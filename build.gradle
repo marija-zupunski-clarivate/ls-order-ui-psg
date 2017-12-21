@@ -36,16 +36,16 @@ apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'war'
 
-//for Ant filter - begintoken, endtoken
-import org.apache.tools.ant.filters.ReplaceTokens
-
 
 def permanentPackageName = project.name
 def group = 'thomsonreuters-1p'
 def rpmRelease = 1
 def snapshot = true
+
 if (snapshot) { rpmRelease = 'SNAPSHOT' }
+
 def envVal = (project.hasProperty('env') ?  project.property('env'): 'dev')
+
 println "  env: " + envVal
 def envPropFile = 'conf/' + envVal + '.properties'
 println "  env property file: " + envPropFile
@@ -62,9 +62,9 @@ task copyContextFile(type:Copy){
     from "conf"
     into ("web/META-INF")
     include('context.xml.config')
-	rename ('context.xml.config', 'context.xml')
-    filter(ReplaceTokens, tokens: envProps)
-	println('test: ' + envProps.getProperty('jdbc.user'))
+    rename ('context.xml.config', 'context.xml')
+    filter(org.apache.tools.ant.filters.ReplaceTokens, tokens: envProps)
+    println('test: ' + envProps.getProperty('jdbc.user'))
 }
 
 // ovog nema ...
