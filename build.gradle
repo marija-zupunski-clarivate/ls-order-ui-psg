@@ -91,8 +91,8 @@ war.dependsOn('copyContextFile')
 repositories {
  
  	flatDir	{ dirs 'lib', 'systemLib' }
-	maven	{ url "http://repo.oneplatform.build/nexus/content/repositories/releases/" }
-	maven	{ url "http://repo.maven.apache.org/maven2" } 
+	/*maven	{ url "http://repo.oneplatform.build/nexus/content/repositories/releases/" }
+	maven	{ url "http://repo.maven.apache.org/maven2" } */
 	mavenCentral()
 
 }
@@ -115,7 +115,6 @@ dependencies {
 	compile name: 'sqlj'
 	compile name: 'ts-framework-4.0.0.2'
 	compile name: 'xercesImpl'
-	//compile name: 'servlet-api'
 
 	
 	//compile name: 'db2fs'
@@ -128,7 +127,6 @@ dependencies {
 	compile name: 'db2qgjava'
 	//compile name: 'jdbc2_0-stdext'
 	//compile name: 'saxon-jdom'
-	compile name: 'saxon8'
 	compile name: 'xalan-2.7.0'
 	//compile name: 'xml-apis-1.0.b2'
 	
